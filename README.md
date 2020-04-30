@@ -6,7 +6,7 @@ This document will walk through the project's individual components and provide 
 
 ## Workflow
 
-![ghIssueFlowDiagram](./ghissuesflow.png)
+![ghIssueFlowDiagram](ghissuesflow.png)
 
 ### Components
 This project is made up of several components:
@@ -55,7 +55,7 @@ Anyone in the IoT D&D group should have access to the flow [here](https://previe
 #### PowerBI dashboard
 The dashboard is hosted in the IoT Developers & Devices workspace within PowerBI. It can be edited within the web browser or by opening it in the PowerBI desktop app. It ingests data from the Azure Blob Storage account.
 
-***Note***: if starting from scratch with a new data set, you will need to set permissions within PowerBI to access the Azure Blob Storage account. This can be done on the `Settings` page under `Data Source Credentials`, where you must provide the account's primary access key. ![dashboardSettings](./dashboardSettings.png)
+***Note***: if starting from scratch with a new data set, you will need to set permissions within PowerBI to access the Azure Blob Storage account. This can be done on the `Settings` page under `Data Source Credentials`, where you must provide the account's primary access key. ![dashboardSettings](dashboardSettings.png)
 
 
 ## How to update
