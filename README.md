@@ -91,3 +91,14 @@ If you have changed the data source location, then you must reconfigure the data
     - `bug`
 2) Add a measure for time to first response
 3) Adapt for when we move to Track 2 SDK repos
+
+## Limitations
+This is, to be honest, a hackier solution than we may want long term. The main limitation is the .csv file output. This seemed like the easiest way to quickly grab and display data, yet it means a few things:
+1) The dashboard is not and cannot be made live-- it is only as accurate as its update schedule, which right now is daily. This seemed like an appropriate trade-off considering the slower fluctuation of github issues. 
+2) The persistent data storage lacks resiliency. If the `ghissuescsv.csv` file is accidentally overwritten or lost while someone is making changes to this flow, we lose the historic view of issues up to that date and would have to start from scratch. *Area of future work*: have some kind of weekly and monthly failover flows for data persistence.
+
+
+
+
+
+
