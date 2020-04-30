@@ -90,7 +90,11 @@ If you have changed the data source location, then you must reconfigure the data
     - `enhancement`
     - `bug`
 2) Add a measure for time to first response
-3) Adapt for when we move to Track 2 SDK repos
+3) Use this as a tool with purpose: 
+    - Define what metrics are important to measure
+    - Set goals to hit and timeframes to hit them
+    - Document this as a process to go execute on
+4) Adapt for when we move to Track 2 SDK repos
 
 ## Limitations
 This is, to be honest, a hackier solution than we may want long term. The main limitation is the .csv file output. This seemed like the easiest way to quickly grab and display data, yet it means a few things:
