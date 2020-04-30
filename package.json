@@ -1,0 +1,17 @@
+{
+  "name": "githubissues",
+  "version": "1.0.0",
+  "description": "Azure IoT SDK tool to gather data on github issues",
+  "scripts": {
+    "start": "func start",
+    "test": "echo \"No tests yet...\""
+  },
+  "dependencies": {
+    "@azure/storage-blob": "^12.0.0",
+    "@types/dotenv": "^4.0.3",
+    "dotenv": "^6.0.0",
+    "csv-writer": "^1.6.0",
+    "file-system": "^2.2.2"
+  },
+  "devDependencies": {}
+}

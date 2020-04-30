@@ -1,0 +1,21 @@
+Date,SDK Name,Issues,New Issues,Stale Issues,Unassigned Issues,Enhancements,Under Investigation
+04/08/2020,azure-iot-sdk-node,15,2,12,4,6,5
+04/08/2020,azure-iot-sdk-python,13,3,4,3,2,5
+04/08/2020,azure-iot-sdk-c,77,3,66,45,14,20
+04/08/2020,azure-iot-sdk-csharp,98,3,88,57,19,26
+04/08/2020,azure-iot-sdk-java,32,1,21,19,11,4
+04/09/2020,azure-iot-sdk-node,15,2,12,4,6,5
+04/09/2020,azure-iot-sdk-python,13,4,4,2,2,5
+04/09/2020,azure-iot-sdk-c,76,2,67,44,14,19
+04/09/2020,azure-iot-sdk-csharp,97,2,87,58,19,26
+04/09/2020,azure-iot-sdk-java,31,0,22,19,11,3
+04/10/2020,azure-iot-sdk-node,14,2,11,4,6,5
+04/10/2020,azure-iot-sdk-python,14,5,4,3,2,5
+04/10/2020,azure-iot-sdk-c,78,4,67,46,14,19
+04/10/2020,azure-iot-sdk-csharp,97,1,88,56,19,26
+04/10/2020,azure-iot-sdk-java,31,0,22,19,11,3
+04/11/2020,azure-iot-sdk-node,14,2,11,4,6,5
+04/11/2020,azure-iot-sdk-python,13,4,4,2,2,5
+04/11/2020,azure-iot-sdk-c,79,5,67,46,14,19
+04/11/2020,azure-iot-sdk-csharp,96,1,88,56,19,25
+04/11/2020,azure-iot-sdk-java,31,0,23,19,11,3
