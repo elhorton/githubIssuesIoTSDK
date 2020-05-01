@@ -13,7 +13,7 @@ This project is made up of several components:
 - Azure function automated Node.js script
 - Azure Blob storage account containing csv files outputted from the Azure Function script
 - Microsoft Power Flow which automatically updates the Power BI dashboard when an update is made to the blob storage account
-- PowerBI dashboard that ingests the .csv files from the Azure Blob storage account to display visual displays
+- PowerBI dashboard that ingests the .csv files from the Azure Blob storage account to visually display the data
 
 #### Azure Function Node.js script
 The code in this repo is almost all related solely to the Azure Function Node.js script. The main script, `index.js`, is contained in the `TimerTriggerGhIssues` folder. It is programmed to run daily, currently at 1 am PST each night. See the `TimerTriggerGhIssues` for how to adjust the timing. 
@@ -23,7 +23,7 @@ The script is fairly simple-- it uses the Github Developers REST API to return a
 - **New issues**: created in the last 7 days
 - **Stale issues**: has not been updated in the last 14 days
 - **Unassigned issues**: Has not been assigned to an owner for triaging
-- **Enhancments**: issues with an `enhancement` label, this indicates that the feature team has marked it as a possible enhancement in the backlog
+- **Enhancements**: issues with an `enhancement` label, this indicates that the feature team has marked it as a possible enhancement in the backlog
 - **Under Investigation**: issues with an `investigation-required` tag, this indicates that the feature team needs to further investigate and it is on the backlog. 
 
 **Output:**
@@ -32,20 +32,20 @@ The script makes use of the `csv-writer` module to generate two unique .csv file
 1) `githubissues.csv` contains the historic data from every run of this script. It is not smart-- all it does is append rather than overwrite. So it will append to the current `githubissues.csv` in the project repo. If that file does not exist, it will generate a new one, but the .csv headers will be missing.
 2) `recentgithubissues.csv` is overwritten each time the script runs, and contains only the data from the most recent run. This is useful for separating data in the PowerBI dashboard to show current stats vs. historic data trends.
 
-Both of these files are uploaded to the Azure Blob Storage account upon generation, which leads us to the next component. 
+Both of these files are uploaded to the Azure Blob Storage account upon generation, which leads us to the next component below. 
 
 The function app currently lives in the IoT Developer and Devices team's `aziotclb` Azure subscription. You can deploy a function app easily from VS Code by installing the `Azure Functions` extension and selecting `Azure Functions: Deploy  to Function App` from the options. 
 
 ***Note***: When deploying for the first time, VS Code automatically deploys the app's code as a package in Azure. This unfortunately means that the app does not have write access to the Azure filesystem (important for the .csv files). To fix this, go to the Function App's settings within Azure portal, and delete the `RUN_FROM_PACKAGE` or similar-sounding setting, then re-deploy. 
 
-***Note***: When running this script, you will need to set up the environment variable for the storage account's connection string. 
+***Another note***: When running this script, you will need to set up the environment variable for the storage account's connection string. 
 
 #### Azure Blob Storage account
 
 This is pretty straightforward, it's just an Azure Blob storage account with two containers, `ghissuescsv` and `newghissuecsv`, for each .csv file mentioned above. The account resides in the internal `aziotclb` subscription. 
 
 #### Microsoft Power Flow
-This is a very simple automation flow hosted by Microsoft Power Apps and registered to the IoT Developers & Devices service group. It only has two steps:
+This is a simple automation flow hosted by Microsoft Power Apps and registered to the IoT Developers & Devices service group. It only has two steps:
 1) When there is a change to the `ghissuescsv` container,
 2) Refresh the PowerBI dashboard
 
@@ -55,7 +55,7 @@ Anyone in the IoT D&D group should have access to the flow [here](https://previe
 #### PowerBI dashboard
 The dashboard is hosted in the IoT Developers & Devices workspace within PowerBI. It can be edited within the web browser or by opening it in the PowerBI desktop app. It ingests data from the Azure Blob Storage account.
 
-***Note***: if starting from scratch with a new data set, you will need to set permissions within PowerBI to access the Azure Blob Storage account. This can be done on the `Settings` page under `Data Source Credentials`, where you must provide the account's primary access key. ![dashboardSettings](dashboardSettings.PNG)
+***Note***: if starting from scratch with a new data set hosted in a separate Azure Blob Storage account, you will need to set permissions within PowerBI to access that account. This can be done on the `Settings` page under `Data Source Credentials`, where you must provide the account's primary access key. ![dashboardSettings](dashboardSettings.PNG)
 
 
 ## How to update
@@ -69,6 +69,7 @@ The dashboard is hosted in the IoT Developers & Devices workspace within PowerBI
 ### Update the script
 - Set up the local workspace
 - Test changes to the script locally using the `Azure Functions` extension
+    - You should be able to verify that the .csv files are being created properly and see the data that the REST APIs is returning in console logs. 
 - Redeploy the Function App in the same location-- this will keep the rest of the flow the same. If you change where the files are loaded (different Storage account), then you will have to update the Power Automation flow as well. 
 
 ### Update the timing
@@ -97,8 +98,8 @@ If you have changed the data source location, then you must reconfigure the data
 4) Adapt for when we move to Track 2 SDK repos
 
 ## Limitations
-This is, to be honest, a hackier solution than we may want long term. The main limitation is the .csv file output. This seemed like the easiest way to quickly grab and display data, yet it means a few things:
-1) The dashboard is not and cannot be made live-- it is only as accurate as its update schedule, which right now is daily. This seemed like an appropriate trade-off considering the slower fluctuation of github issues. 
+This is, to be honest, a hackier solution than we may want long term. The main limitation is the .csv file output. This seemed like the easiest way to quickly grab and display data, yet it means a couple of things:
+1) The dashboard is not and cannot be made live-- it is only as accurate as when it was last updated, which right now is daily. This seemed like an appropriate trade-off considering the slower fluctuation of github issues.
 2) The persistent data storage lacks resiliency. If the `ghissuescsv.csv` file is accidentally overwritten or lost while someone is making changes to this flow, we lose the historic view of issues up to that date and would have to start from scratch. *Area of future work*: have some kind of weekly and monthly failover flows for data persistence.
 
 
